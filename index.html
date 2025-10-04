@@ -55,20 +55,15 @@
         </div>
       </div>
 
-      <!-- Full-bleed hero headshot (robust loader + debug tag) -->
+      <!-- Full-bleed hero headshot (load from repo root) -->
       <div class="relative h-[44vh] md:h-[56vh] w-full">
-        <img id="hero-headshot"
-             src="./assets/headshot.jpg"
-             alt="Jorge Martinez professional headshot"
-             class="absolute inset-0 w-full h-full object-cover object-center"
-             loading="eager" />
+        <img
+          src="./headshot.jpg?v=1"
+          alt="Jorge Martinez professional headshot"
+          class="absolute inset-0 w-full h-full object-cover object-center"
+          loading="eager"
+        />
         <div class="absolute inset-0 bg-gradient-to-br from-neutral-950/30 via-neutral-900/20 to-neutral-950/30"></div>
-
-        <!-- tiny debug pill shows which URL actually loaded; remove after success -->
-        <div id="img-debug"
-             class="absolute left-2 top-2 z-20 text-[10px] md:text-xs px-2 py-0.5 rounded-full bg-neutral-900/70 border border-neutral-700 text-neutral-300">
-          loading…
-        </div>
       </div>
 
       <!-- Highlights strip (no overlap) -->
@@ -258,45 +253,7 @@
     </footer>
 
     <script>
-      // Set dynamic year
       document.getElementById('year').textContent = new Date().getFullYear();
-
-      // Robust image loader: try multiple URL variants, report which one worked.
-      (function() {
-        const debugEl = document.getElementById('img-debug');
-        const imgEl = document.getElementById('hero-headshot');
-        const v = Date.now(); // cache buster
-        const candidates = [
-          `./assets/headshot.jpg?v=${v}`,
-          `/assets/headshot.jpg?v=${v}`,
-          `./assets/Headshot.jpg?v=${v}`,
-          `/assets/Headshot.jpg?v=${v}`,
-          `./assets/headshot.JPG?v=${v}`,
-          `/assets/headshot.JPG?v=${v}`
-        ];
-
-        function tryNext(i) {
-          if (i >= candidates.length) {
-            debugEl.textContent = 'image not found';
-            debugEl.classList.add('bg-red-900/70','border-red-800','text-red-200');
-            return;
-          }
-          const url = candidates[i];
-          const probe = new Image();
-          probe.onload = () => {
-            imgEl.src = url;
-            debugEl.textContent = 'loaded: ' + url.replace(location.origin,'');
-            debugEl.classList.remove('bg-red-900/70','border-red-800','text-red-200');
-            debugEl.classList.add('bg-neutral-900/70','border-neutral-700','text-neutral-300');
-          };
-          probe.onerror = () => tryNext(i + 1);
-          probe.src = url;
-        }
-
-        // start loading
-        debugEl.textContent = 'loading…';
-        tryNext(0);
-      })();
     </script>
   </body>
 </html>
