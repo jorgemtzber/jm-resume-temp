@@ -60,20 +60,19 @@
           <a href="#contact" class="rounded-full bg-white text-neutral-900 px-5 py-2.5 font-medium hover:opacity-90">Buy (Hire)</a>
           <a href="#reel" class="rounded-full border border-neutral-700 px-5 py-2.5 font-medium hover:border-neutral-500">Watch the reel</a>
         </div>
+      </div>
 
-        <!-- Headshot under CTAs (correct placement) -->
+      <!-- Full-bleed hero headshot (replaces the gradient block) -->
+      <div class="relative h-[44vh] md:h-[56vh] w-full">
         <img
           src="/assets/headshot.jpg"
           alt="Jorge Martinez professional headshot"
-          loading="lazy"
-          class="mt-8 md:mt-10 mx-auto max-w-xs md:max-w-sm w-full rounded-2xl ring-1 ring-neutral-800/60 shadow-2xl object-contain"
-          width="640"
-          height="640"
+          class="absolute inset-0 w-full h-full object-cover"
+          loading="eager"
         />
+        <!-- Subtle dark overlay to keep Apple-style contrast -->
+        <div class="absolute inset-0 bg-gradient-to-br from-neutral-950/60 via-neutral-900/40 to-neutral-950/60"></div>
       </div>
-
-      <!-- Edge-to-edge hero render placeholder -->
-      <div class="h-[44vh] md:h-[56vh] w-full bg-gradient-to-br from-neutral-900 via-neutral-800 to-neutral-900"></div>
 
       <!-- Highlights strip -->
       <div id="highlights" class="mx-auto max-w-6xl px-4 -mt-8 md:-mt-12" data-testid="highlights-grid">
