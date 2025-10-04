@@ -8,7 +8,7 @@
     <!-- Tailwind via CDN (no build step) -->
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Optional: neutral system font stack for Apple-like type -->
+    <!-- Optional: neutral system font stack -->
     <style>
       :root {
         --font-system: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
@@ -60,9 +60,21 @@
           <a href="#contact" class="rounded-full bg-white text-neutral-900 px-5 py-2.5 font-medium hover:opacity-90">Buy (Hire)</a>
           <a href="#reel" class="rounded-full border border-neutral-700 px-5 py-2.5 font-medium hover:border-neutral-500">Watch the reel</a>
         </div>
+
+        <!-- Headshot under CTAs (correct placement) -->
+        <img
+          src="/assets/headshot.jpg"
+          alt="Jorge Martinez professional headshot"
+          loading="lazy"
+          class="mt-8 md:mt-10 mx-auto max-w-xs md:max-w-sm w-full rounded-2xl ring-1 ring-neutral-800/60 shadow-2xl object-contain"
+          width="640"
+          height="640"
+        />
       </div>
+
       <!-- Edge-to-edge hero render placeholder -->
       <div class="h-[44vh] md:h-[56vh] w-full bg-gradient-to-br from-neutral-900 via-neutral-800 to-neutral-900"></div>
+
       <!-- Highlights strip -->
       <div id="highlights" class="mx-auto max-w-6xl px-4 -mt-8 md:-mt-12" data-testid="highlights-grid">
         <div class="grid grid-cols-2 md:grid-cols-6 gap-2 md:gap-3">
