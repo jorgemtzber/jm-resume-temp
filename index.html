@@ -62,19 +62,20 @@
         </div>
       </div>
 
-      <!-- Full-bleed hero headshot (image now loads via relative path) -->
+      <!-- Full-bleed hero headshot (cache-busted + fallback) -->
       <div class="relative h-[44vh] md:h-[56vh] w-full">
         <img
-          src="./assets/headshot.jpg"
+          src="./assets/headshot.jpg?v=1"
           alt="Jorge Martinez professional headshot"
           class="absolute inset-0 w-full h-full object-cover object-center"
           loading="eager"
+          onerror="this.onerror=null; this.src='./assets/headshot.jpg?v='+Date.now();"
         />
         <!-- Subtle dark overlay to keep Apple-style contrast -->
         <div class="absolute inset-0 bg-gradient-to-br from-neutral-950/30 via-neutral-900/20 to-neutral-950/30"></div>
       </div>
 
-      <!-- Highlights strip (no negative margin, so it won't overlap the hero image) -->
+      <!-- Highlights strip (no overlap) -->
       <div id="highlights" class="relative z-10 mx-auto max-w-6xl px-4 mt-8 md:mt-12" data-testid="highlights-grid">
         <div class="grid grid-cols-2 md:grid-cols-6 gap-2 md:gap-3">
           <a href="#experience" class="group rounded-xl bg-neutral-900/70 border border-neutral-800 p-4 hover:border-neutral-700">
