@@ -4,15 +4,9 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Jorge Martinez — 3D Resume (Apple Spec)</title>
-
-    <!-- Tailwind via CDN (no build step) -->
     <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- Optional: neutral system font stack -->
     <style>
-      :root {
-        --font-system: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
-      }
+      :root { --font-system: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"; }
       html { font-family: var(--font-system); }
     </style>
   </head>
@@ -31,7 +25,6 @@
         </nav>
         <a href="#contact" class="rounded-full bg-white text-neutral-900 px-4 py-1.5 font-medium hover:opacity-90">Contact</a>
       </div>
-      <!-- Sticky Sub-Nav -->
       <div class="border-t border-neutral-800">
         <div class="mx-auto max-w-6xl px-4 py-2 flex items-center justify-between text-xs text-neutral-400">
           <div class="flex gap-4 overflow-x-auto whitespace-nowrap">
@@ -62,17 +55,20 @@
         </div>
       </div>
 
-      <!-- Full-bleed hero headshot (cache-busted + fallback) -->
+      <!-- Full-bleed hero headshot (robust loader + debug tag) -->
       <div class="relative h-[44vh] md:h-[56vh] w-full">
-        <img
-          src="./assets/headshot.jpg?v=1"
-          alt="Jorge Martinez professional headshot"
-          class="absolute inset-0 w-full h-full object-cover object-center"
-          loading="eager"
-          onerror="this.onerror=null; this.src='./assets/headshot.jpg?v='+Date.now();"
-        />
-        <!-- Subtle dark overlay to keep Apple-style contrast -->
+        <img id="hero-headshot"
+             src="./assets/headshot.jpg"
+             alt="Jorge Martinez professional headshot"
+             class="absolute inset-0 w-full h-full object-cover object-center"
+             loading="eager" />
         <div class="absolute inset-0 bg-gradient-to-br from-neutral-950/30 via-neutral-900/20 to-neutral-950/30"></div>
+
+        <!-- tiny debug pill shows which URL actually loaded; remove after success -->
+        <div id="img-debug"
+             class="absolute left-2 top-2 z-20 text-[10px] md:text-xs px-2 py-0.5 rounded-full bg-neutral-900/70 border border-neutral-700 text-neutral-300">
+          loading…
+        </div>
       </div>
 
       <!-- Highlights strip (no overlap) -->
@@ -114,13 +110,11 @@
           Printer Active LLC — Operations Executive (Jun 2023–Present). 18% sales lift, 97% retention, +30% rush throughput; 1–3 day SLAs.
         </p>
       </div>
-      <!-- Media cluster -->
       <div class="mx-auto max-w-6xl px-4 mt-10 grid grid-cols-1 md:grid-cols-3 gap-4">
         <div class="aspect-[16/10] rounded-2xl bg-neutral-900 border border-neutral-800"></div>
         <div class="aspect-[16/10] rounded-2xl bg-neutral-900 border border-neutral-800"></div>
         <div class="aspect-[16/10] rounded-2xl bg-neutral-900 border border-neutral-800"></div>
       </div>
-      <!-- Take a closer look -->
       <div class="mx-auto max-w-6xl px-4 mt-6">
         <div class="rounded-2xl border border-neutral-800 p-6 md:flex items-center justify-between">
           <div>
@@ -130,7 +124,6 @@
           <a href="#gallery" class="mt-4 md:mt-0 rounded-full border border-neutral-700 px-4 py-2 hover:border-neutral-500">Open gallery</a>
         </div>
       </div>
-      <!-- Feature panels -->
       <div class="mx-auto max-w-6xl px-4 mt-10 grid grid-cols-1 md:grid-cols-3 gap-4">
         <div class="rounded-2xl border border-neutral-800 p-5">
           <div class="aspect-[16/10] rounded-lg bg-neutral-900 mb-3"></div>
@@ -267,6 +260,43 @@
     <script>
       // Set dynamic year
       document.getElementById('year').textContent = new Date().getFullYear();
+
+      // Robust image loader: try multiple URL variants, report which one worked.
+      (function() {
+        const debugEl = document.getElementById('img-debug');
+        const imgEl = document.getElementById('hero-headshot');
+        const v = Date.now(); // cache buster
+        const candidates = [
+          `./assets/headshot.jpg?v=${v}`,
+          `/assets/headshot.jpg?v=${v}`,
+          `./assets/Headshot.jpg?v=${v}`,
+          `/assets/Headshot.jpg?v=${v}`,
+          `./assets/headshot.JPG?v=${v}`,
+          `/assets/headshot.JPG?v=${v}`
+        ];
+
+        function tryNext(i) {
+          if (i >= candidates.length) {
+            debugEl.textContent = 'image not found';
+            debugEl.classList.add('bg-red-900/70','border-red-800','text-red-200');
+            return;
+          }
+          const url = candidates[i];
+          const probe = new Image();
+          probe.onload = () => {
+            imgEl.src = url;
+            debugEl.textContent = 'loaded: ' + url.replace(location.origin,'');
+            debugEl.classList.remove('bg-red-900/70','border-red-800','text-red-200');
+            debugEl.classList.add('bg-neutral-900/70','border-neutral-700','text-neutral-300');
+          };
+          probe.onerror = () => tryNext(i + 1);
+          probe.src = url;
+        }
+
+        // start loading
+        debugEl.textContent = 'loading…';
+        tryNext(0);
+      })();
     </script>
   </body>
 </html>
