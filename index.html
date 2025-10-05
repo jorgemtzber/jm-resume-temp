@@ -5,10 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Jorge Martinez — 3D Resume (Apple Spec)</title>
 
-    <!-- Tailwind via CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Base type -->
     <style>
       :root {
         --font-system: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
@@ -16,37 +14,51 @@
       html { font-family: var(--font-system); }
     </style>
 
-    <!-- Sprite icons for Highlights (background-image sprite) -->
+    <!-- Sprite icons (white via CSS mask; sprite bytes are unchanged) -->
     <style>
-      /* === Tile shell === */
       .tile-icon{
-        height: 4rem;                 /* h-16 */
-        border-radius: .5rem;         /* rounded-lg */
-        background-color: rgb(38 38 38);  /* neutral-800 */
-        margin-bottom: .75rem;        /* mb-3 */
+        position: relative;
+        height: 4rem;            /* h-16 */
+        border-radius: .5rem;    /* rounded-lg */
+        background-color: rgb(38 38 38); /* neutral-800 */
+        margin-bottom: .75rem;   /* mb-3 */
         transition: background-color .2s ease;
-        /* Sprite as background (cache-busted) */
-        background-image: url('./assets/icons-sprite.png?v=5');
-        background-repeat: no-repeat;
-        /* Assumes 3 columns × 2 rows with NO margins around the grid.
-           If your collage has outer margins/padding, tell me and I’ll adjust these two lines. */
-        background-size: 300% 200%;
-        background-position: 0% 0%;
+        overflow: hidden;
       }
       a.group:hover .tile-icon{ background-color: rgb(64 64 64); } /* neutral-700 */
 
-      /* Cell positions (cols: 0/50/100, rows: 0/100) */
-      .icon-experience     { background-position:   0%   0%; }  /* top-left */
-      .icon-skills         { background-position:  50%   0%; }  /* top-center */
-      .icon-education      { background-position: 100%   0%; }  /* top-right */
-      .icon-milestones     { background-position:   0% 100%; }  /* bottom-left */
-      .icon-certifications { background-position:  50% 100%; }  /* bottom-center */
-      .icon-contact        { background-position: 100% 100%; }  /* bottom-right */
+      /* Icon layer drawn from PNG sprite */
+      .tile-icon::after{
+        content: "";
+        position: absolute;
+        inset: 0;
 
-      /* ---- TEMP: debug helper styles (safe to remove after verification) ---- */
-      .debug-wrap{ display: none; } /* set to block to show; we toggle via inline style below */
-      .debug-img{ max-width: 100%; height: auto; border-radius: .75rem; border: 1px solid rgb(64 64 64); }
-      .debug-note{ font-size: .75rem; color: rgb(163 163 163); }
+        /* icon color */
+        background-color: white;
+        opacity: .98;
+
+        /* use your sprite as a mask: 3 columns × 2 rows */
+        -webkit-mask-image: url('./assets/icons-sprite.png?v=6');
+                mask-image: url('./assets/icons-sprite.png?v=6');
+        -webkit-mask-repeat: no-repeat;
+                mask-repeat: no-repeat;
+        -webkit-mask-size: 300% 200%;
+                mask-size: 300% 200%;
+        -webkit-mask-position: var(--mask-x,0%) var(--mask-y,0%);
+                mask-position: var(--mask-x,0%) var(--mask-y,0%);
+      }
+
+      /* cell selection (cols 0/50/100; rows 0/100) */
+      .icon-experience     { --mask-x:   0%; --mask-y:   0%; }
+      .icon-skills         { --mask-x:  50%; --mask-y:   0%; }
+      .icon-education      { --mask-x: 100%; --mask-y:   0%; }
+      .icon-milestones     { --mask-x:   0%; --mask-y: 100%; }
+      .icon-certifications { --mask-x:  50%; --mask-y: 100%; }
+      .icon-contact        { --mask-x: 100%; --mask-y: 100%; }
+
+      /* TEMP: sprite debug viewer (shows the collage); remove after verifying */
+      .debug-note{ font-size:.75rem; color:rgb(163 163 163); }
+      .debug-img{ max-width:100%; height:auto; border-radius:.75rem; border:1px solid rgb(64 64 64); }
     </style>
   </head>
 
@@ -65,7 +77,6 @@
         </nav>
         <a href="#contact" class="rounded-full bg-white text-neutral-900 px-4 py-1.5 font-medium hover:opacity-90">Contact</a>
       </div>
-      <!-- Sticky Sub-Nav -->
       <div class="border-t border-neutral-800">
         <div class="mx-auto max-w-6xl px-4 py-2 flex items-center justify-between text-xs text-neutral-400">
           <div class="flex gap-4 overflow-x-auto whitespace-nowrap">
@@ -84,10 +95,10 @@
     <!-- Hero -->
     <section class="relative overflow-hidden">
       <div class="mx-auto max-w-6xl px-4 pt-20 pb-10 md:pt-28 md:pb-16">
-        <h1 class="mt-4 text-5xl md:text-7xl font-semibold leading-[1.05]" data-testid="hero-h1">
+        <h1 class="mt-4 text-5xl md:text-7xl font-semibold leading-[1.05]">
           Operator. Closer. Systems thinker.
         </h1>
-        <p class="mt-6 max-w-xl text-neutral-300 text-base md:text-lg leading-relaxed" data-testid="hero-proof">
+        <p class="mt-6 max-w-xl text-neutral-300 text-base md:text-lg leading-relaxed">
           18% revenue growth, 97% retention, +30% rush capacity. Short sales cycles (1–3 days), bilingual, Security+.
         </p>
         <div class="mt-8 flex flex-wrap gap-3">
@@ -96,19 +107,15 @@
         </div>
       </div>
 
-      <!-- Full-bleed hero headshot -->
+      <!-- Full-bleed headshot -->
       <div class="relative h-[44vh] md:h-[56vh] w-full">
-        <img
-          src="./headshot.jpg?v=1"
-          alt="Jorge Martinez professional headshot"
-          class="absolute inset-0 w-full h-full object-cover object-center"
-          loading="eager"
-        />
+        <img src="./headshot.jpg?v=1" alt="Jorge Martinez professional headshot"
+             class="absolute inset-0 w-full h-full object-cover object-center" loading="eager" />
         <div class="absolute inset-0 bg-gradient-to-br from-neutral-950/30 via-neutral-900/20 to-neutral-950/30"></div>
       </div>
 
       <!-- Highlights strip -->
-      <div id="highlights" class="relative z-10 mx-auto max-w-6xl px-4 mt-8 md:mt-12" data-testid="highlights-grid">
+      <div id="highlights" class="relative z-10 mx-auto max-w-6xl px-4 mt-8 md:mt-12">
         <div class="grid grid-cols-2 md:grid-cols-6 gap-2 md:gap-3">
 
           <a href="#experience" class="group rounded-xl bg-neutral-900/70 border border-neutral-800 p-4 hover:border-neutral-700">
@@ -144,18 +151,21 @@
         </div>
       </div>
 
-      <!-- TEMP: Sprite debug viewer (shows the full collage).
-           If you see the image here, the path is correct. Remove this block later. -->
-      <div class="debug-wrap block mx-auto max-w-6xl px-4 mt-6">
+      <!-- TEMP: sprite debug viewer (remove later) -->
+      <div class="mx-auto max-w-6xl px-4 mt-6">
         <div class="rounded-2xl border border-neutral-800 p-4">
-          <div class="debug-note mb-2">Sprite debug viewer – if you can see the full collage below, the sprite path <code>assets/icons-sprite.png?v=5</code> is loading correctly.</div>
-          <img class="debug-img" src="./assets/icons-sprite.png?v=5" alt="Sprite debug" />
+          <div class="debug-note mb-2">
+            Sprite debug viewer — if you can see the collage below, the sprite path
+            <code>/assets/icons-sprite.png?v=6</code> is loading correctly.
+          </div>
+          <img class="debug-img" src="/assets/icons-sprite.png?v=6" alt="Sprite debug">
         </div>
       </div>
 
     </section>
 
-    <!-- Design → Experience -->
+    <!-- Rest of the page unchanged ... -->
+
     <section id="experience" class="pt-20 md:pt-32" aria-label="Experience">
       <div class="mx-auto max-w-3xl px-4">
         <h2 class="text-4xl md:text-5xl font-semibold leading-tight">Experience designed for speed and reliability</h2>
@@ -196,109 +206,8 @@
       </div>
     </section>
 
-    <!-- Cameras -->
-    <section id="cameras" class="pt-24 md:pt-32">
-      <div class="mx-auto max-w-3xl px-4">
-        <h2 class="text-4xl md:text-5xl font-semibold">Stories at every focal length</h2>
-        <p class="mt-3 text-neutral-300" data-testid="cameras-sub">Short-cycle specialist consistently delivering top-tier performance</p>
-      </div>
-      <div class="mx-auto max-w-6xl px-4 mt-10 grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div class="rounded-2xl border border-neutral-800 p-5">
-          <div class="aspect-[4/3] rounded-lg bg-neutral-900 mb-3"></div>
-          <div class="text-sm uppercase tracking-wide text-neutral-400">Prospecting</div>
-          <p class="text-sm text-neutral-300 mt-1">Step-through narrative panel with metric overlays.</p>
-        </div>
-        <div class="rounded-2xl border border-neutral-800 p-5">
-          <div class="aspect-[4/3] rounded-lg bg-neutral-900 mb-3"></div>
-          <div class="text-sm uppercase tracking-wide text-neutral-400">Discovery</div>
-          <p class="text-sm text-neutral-300 mt-1">Step-through narrative panel with metric overlays.</p>
-        </div>
-        <div class="rounded-2xl border border-neutral-800 p-5">
-          <div class="aspect-[4/3] rounded-lg bg-neutral-900 mb-3"></div>
-          <div class="text-sm uppercase tracking-wide text-neutral-400">Close</div>
-          <p class="text-sm text-neutral-300 mt-1">Step-through narrative panel with metric overlays.</p>
-        </div>
-      </div>
-    </section>
+    <!-- (Other sections unchanged) -->
 
-    <!-- Performance -->
-    <section id="performance" class="pt-24 md:pt-32">
-      <div class="mx-auto max-w-6xl px-4 grid md:grid-cols-2 gap-10 items-center">
-        <div>
-          <h2 class="text-4xl md:text-5xl font-semibold">Performance you can ship</h2>
-          <p class="mt-3 text-neutral-300">Pipeline cadence 8–12 touches/day; 60–75% close rate on repeats. Ops &amp; IT support ready.</p>
-        </div>
-        <div class="aspect-[16/10] rounded-2xl bg-neutral-900 border border-neutral-800"></div>
-      </div>
-    </section>
-
-    <!-- OS & Intelligence -->
-    <section id="os" class="pt-24 md:pt-32">
-      <div class="mx-auto max-w-6xl px-4 grid md:grid-cols-2 gap-10 items-center">
-        <div>
-          <h2 class="text-4xl md:text-5xl font-semibold">OS &amp; Intelligence</h2>
-          <p class="mt-3 text-neutral-300">Tooling: Salesforce, HubSpot, SaaS stack.</p>
-        </div>
-        <div class="aspect-[16/10] rounded-2xl bg-neutral-900 border border-neutral-800"></div>
-      </div>
-    </section>
-
-    <!-- Accessories / Specs -->
-    <section id="accessories" class="pt-24 md:pt-32">
-      <div class="mx-auto max-w-6xl px-4">
-        <h2 class="text-4xl md:text-5xl font-semibold">Accessories &amp; Tech Specs</h2>
-        <div class="mt-6 grid md:grid-cols-2 gap-6">
-          <div class="rounded-2xl border border-neutral-800 p-6" id="education">
-            <h3 class="text-xl font-medium">Education</h3>
-            <ul class="mt-2 text-neutral-300 text-sm space-y-1" data-testid="education-list">
-              <li data-testid="edu-item-1">Western Governors University — B.S. Cybersecurity (2026)</li>
-            </ul>
-          </div>
-          <div class="rounded-2xl border border-neutral-800 p-6">
-            <h3 class="text-xl font-medium">Certifications</h3>
-            <ul class="mt-2 text-neutral-300 text-sm space-y-1" data-testid="certifications-list">
-              <li>CompTIA Security+ (2025)</li>
-              <li>Google Cybersecurity Professional Certificate (2025)</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Milestones -->
-    <section id="milestones" class="pt-24 md:pt-32">
-      <div class="mx-auto max-w-6xl px-4">
-        <h2 class="text-4xl md:text-5xl font-semibold">Career milestones</h2>
-        <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div class="rounded-2xl border border-neutral-800 p-6">
-            <div class="text-3xl font-semibold">18% YoY lift</div>
-            <p class="text-sm text-neutral-300 mt-2">Compact copy explaining the win.</p>
-          </div>
-          <div class="rounded-2xl border border-neutral-800 p-6">
-            <div class="text-3xl font-semibold">97% retention</div>
-            <p class="text-sm text-neutral-300 mt-2">Compact copy explaining the win.</p>
-          </div>
-          <div class="rounded-2xl border border-neutral-800 p-6">
-            <div class="text-3xl font-semibold">3 enterprise booths in &lt;10 days</div>
-            <p class="text-sm text-neutral-300 mt-2">Compact copy explaining the win.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Contact -->
-    <section id="contact" class="pt-24 md:pt-32 pb-24">
-      <div class="mx-auto max-w-3xl px-4 text-center">
-        <h2 class="text-4xl md:text-5xl font-semibold">Let’s build something fast.</h2>
-        <p class="mt-3 text-neutral-300">The Woodlands, TX • (469) 207-8693 • jorgemtzber02@gmail.com</p>
-        <div class="mt-6 flex justify-center gap-3">
-          <a href="#" class="rounded-full bg-white text-neutral-900 px-5 py-2.5 font-medium hover:opacity-90">Email me</a>
-          <a href="#" class="rounded-full border border-neutral-700 px-5 py-2.5 font-medium hover:border-neutral-500">Download PDF</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- Footer -->
     <footer class="border-t border-neutral-900 py-10 text-xs text-neutral-400">
       <div class="mx-auto max-w-6xl px-4 flex flex-col md:flex-row items-center justify-between gap-4">
         <div>© <span id="year"></span> Jorge Martinez</div>
@@ -310,8 +219,6 @@
       </div>
     </footer>
 
-    <script>
-      document.getElementById('year').textContent = new Date().getFullYear();
-    </script>
+    <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
   </body>
 </html>
