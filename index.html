@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Jorge Martinez — 3D Resume (Apple Spec)</title>
 
-    <!-- Tailwind via CDN (no build step) -->
+    <!-- Tailwind via CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
 
     <!-- Base type -->
@@ -16,46 +16,33 @@
       html { font-family: var(--font-system); }
     </style>
 
-    <!-- Sprite icons for highlights (byte-perfect; uses one PNG) -->
+    <!-- Sprite icons for Highlights -->
     <style>
-      /* === Byte-perfect 6-icon sprite for the highlight tiles ===
-         Sprite grid assumed 3 columns × 2 rows, equal-size cells.
-         If your collage layout differs, I’ll remap positions. */
-
+      /* === 6-logo sprite (3 cols × 2 rows) === */
       .tile-icon{
-        height: 4rem;                /* h-16 */
-        border-radius: .5rem;        /* rounded-lg */
-        background-color: rgb(38 38 38); /* neutral-800 */
-        margin-bottom: .75rem;       /* mb-3 */
+        height: 4rem;                 /* h-16 */
+        border-radius: .5rem;         /* rounded-lg */
+        background-color: rgb(82 82 82);  /* neutral-600 so black icons show */
+        margin-bottom: .75rem;        /* mb-3 */
         transition: background-color .2s ease;
-
-        /* Cache-busted sprite URL; keeps PNG bytes untouched */
-        background-image: url('./assets/icons-sprite.png?v=2');
+        background-image: url('./assets/icons-sprite.png?v=3'); /* cache-bust */
         background-repeat: no-repeat;
-
-        /* Show one cell of a 3×2 grid: 3 cols × 2 rows */
-        background-size: 300% 200%;
+        background-size: 300% 200%;   /* 3 cols × 2 rows */
         background-position: 0% 0%;
-
-        /* Make dark icons pop on dark tile (remove if your art is already light) */
-        filter: invert(1);
-        opacity: .95;
+        opacity: .98;
       }
-      a.group:hover .tile-icon{ background-color: rgb(64 64 64); } /* neutral-700 */
+      a.group:hover .tile-icon{ background-color: rgb(115 115 115); } /* neutral-500 */
 
-      /* Grid cell positions:
-         column: 1=0%  2=50%  3=100%
-         row:    1=0%  2=100% */
-      .icon-experience     { background-position:   0%   0%; }  /* top-left        */
-      .icon-skills         { background-position:  50%   0%; }  /* top-center      */
-      .icon-education      { background-position: 100%   0%; }  /* top-right       */
-      .icon-milestones     { background-position:   0% 100%; }  /* bottom-left     */
-      .icon-certifications { background-position:  50% 100%; }  /* bottom-center   */
-      .icon-contact        { background-position: 100% 100%; }  /* bottom-right    */
+      /* Cell positions: col 0/50/100, row 0/100 */
+      .icon-experience     { background-position:   0%   0%; } /* top-left */
+      .icon-skills         { background-position:  50%   0%; } /* top-center */
+      .icon-education      { background-position: 100%   0%; } /* top-right */
+      .icon-milestones     { background-position:   0% 100%; } /* bottom-left */
+      .icon-certifications { background-position:  50% 100%; } /* bottom-center */
+      .icon-contact        { background-position: 100% 100%; } /* bottom-right */
 
-      /* Optional: if icons look a touch small due to padding in the PNG,
-         increase scale slightly (keeps bytes intact), e.g.:
-         .tile-icon{ background-size: 280% 190%; } */
+      /* If icons look slightly small due to padding in the PNG, try:
+         .tile-icon{ background-size: 280% 190%; }  */
     </style>
   </head>
 
@@ -105,7 +92,7 @@
         </div>
       </div>
 
-      <!-- Full-bleed hero headshot (from repo root) -->
+      <!-- Full-bleed hero headshot -->
       <div class="relative h-[44vh] md:h-[56vh] w-full">
         <img
           src="./headshot.jpg?v=1"
@@ -116,7 +103,7 @@
         <div class="absolute inset-0 bg-gradient-to-br from-neutral-950/30 via-neutral-900/20 to-neutral-950/30"></div>
       </div>
 
-      <!-- Highlights strip (with sprite icons; no overlap) -->
+      <!-- Highlights strip -->
       <div id="highlights" class="relative z-10 mx-auto max-w-6xl px-4 mt-8 md:mt-12" data-testid="highlights-grid">
         <div class="grid grid-cols-2 md:grid-cols-6 gap-2 md:gap-3">
 
@@ -162,13 +149,11 @@
           Printer Active LLC — Operations Executive (Jun 2023–Present). 18% sales lift, 97% retention, +30% rush throughput; 1–3 day SLAs.
         </p>
       </div>
-      <!-- Media cluster -->
       <div class="mx-auto max-w-6xl px-4 mt-10 grid grid-cols-1 md:grid-cols-3 gap-4">
         <div class="aspect-[16/10] rounded-2xl bg-neutral-900 border border-neutral-800"></div>
         <div class="aspect-[16/10] rounded-2xl bg-neutral-900 border border-neutral-800"></div>
         <div class="aspect-[16/10] rounded-2xl bg-neutral-900 border border-neutral-800"></div>
       </div>
-      <!-- Take a closer look -->
       <div class="mx-auto max-w-6xl px-4 mt-6">
         <div class="rounded-2xl border border-neutral-800 p-6 md:flex items-center justify-between">
           <div>
@@ -178,7 +163,6 @@
           <a href="#gallery" class="mt-4 md:mt-0 rounded-full border border-neutral-700 px-4 py-2 hover:border-neutral-500">Open gallery</a>
         </div>
       </div>
-      <!-- Feature panels -->
       <div class="mx-auto max-w-6xl px-4 mt-10 grid grid-cols-1 md:grid-cols-3 gap-4">
         <div class="rounded-2xl border border-neutral-800 p-5">
           <div class="aspect-[16/10] rounded-lg bg-neutral-900 mb-3"></div>
@@ -313,7 +297,6 @@
     </footer>
 
     <script>
-      // Set dynamic year
       document.getElementById('year').textContent = new Date().getFullYear();
     </script>
   </body>
