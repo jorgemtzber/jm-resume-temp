@@ -16,58 +16,37 @@
       html { font-family: var(--font-system); }
     </style>
 
-    <!-- Sprite icons for Highlights using CSS masks (byte-perfect sprite) -->
+    <!-- Sprite icons for Highlights (background-image sprite) -->
     <style>
       /* === Tile shell === */
       .tile-icon{
-        position: relative;
         height: 4rem;                 /* h-16 */
         border-radius: .5rem;         /* rounded-lg */
         background-color: rgb(38 38 38);  /* neutral-800 */
         margin-bottom: .75rem;        /* mb-3 */
-        overflow: hidden;
         transition: background-color .2s ease;
+        /* Sprite as background (cache-busted) */
+        background-image: url('./assets/icons-sprite.png?v=5');
+        background-repeat: no-repeat;
+        /* Assumes 3 columns × 2 rows with NO margins around the grid.
+           If your collage has outer margins/padding, tell me and I’ll adjust these two lines. */
+        background-size: 300% 200%;
+        background-position: 0% 0%;
       }
       a.group:hover .tile-icon{ background-color: rgb(64 64 64); } /* neutral-700 */
 
-      /* === Icon layer (mask) ===
-         We render the icon via -webkit-mask/mask so we control its color,
-         independent of the tile background. The sprite bytes are unchanged. */
-      .tile-icon::after{
-        content: "";
-        position: absolute;
-        inset: 0;
+      /* Cell positions (cols: 0/50/100, rows: 0/100) */
+      .icon-experience     { background-position:   0%   0%; }  /* top-left */
+      .icon-skills         { background-position:  50%   0%; }  /* top-center */
+      .icon-education      { background-position: 100%   0%; }  /* top-right */
+      .icon-milestones     { background-position:   0% 100%; }  /* bottom-left */
+      .icon-certifications { background-position:  50% 100%; }  /* bottom-center */
+      .icon-contact        { background-position: 100% 100%; }  /* bottom-right */
 
-        /* Icon color (white on dark tile) */
-        background-color: white;
-        opacity: .95;
-
-        /* Use your single PNG sprite as a mask (3 columns × 2 rows) */
-        -webkit-mask-image: url('./assets/icons-sprite.png?v=4');
-                mask-image: url('./assets/icons-sprite.png?v=4');
-        -webkit-mask-repeat: no-repeat;
-                mask-repeat: no-repeat;
-        -webkit-mask-size: 300% 200%;
-                mask-size: 300% 200%;
-
-        /* These custom properties get set by each per-icon class */
-        -webkit-mask-position: var(--mask-x, 0%) var(--mask-y, 0%);
-                mask-position: var(--mask-x, 0%) var(--mask-y, 0%);
-      }
-
-      /* === Per-icon cell selection ===
-         Columns: 1=0%  2=50%  3=100%
-         Rows:    1=0%  2=100% */
-      .icon-experience     { --mask-x:   0%; --mask-y:   0%; } /* top-left      */
-      .icon-skills         { --mask-x:  50%; --mask-y:   0%; } /* top-center    */
-      .icon-education      { --mask-x: 100%; --mask-y:   0%; } /* top-right     */
-      .icon-milestones     { --mask-x:   0%; --mask-y: 100%; } /* bottom-left   */
-      .icon-certifications { --mask-x:  50%; --mask-y: 100%; } /* bottom-center */
-      .icon-contact        { --mask-x: 100%; --mask-y: 100%; } /* bottom-right  */
-
-      /* If icons look slightly small due to padding inside the PNG,
-         bump the mask size a touch (keeps your PNG bytes intact):
-         .tile-icon::after{ -webkit-mask-size: 280% 190%; mask-size: 280% 190%; } */
+      /* ---- TEMP: debug helper styles (safe to remove after verification) ---- */
+      .debug-wrap{ display: none; } /* set to block to show; we toggle via inline style below */
+      .debug-img{ max-width: 100%; height: auto; border-radius: .75rem; border: 1px solid rgb(64 64 64); }
+      .debug-note{ font-size: .75rem; color: rgb(163 163 163); }
     </style>
   </head>
 
@@ -164,6 +143,16 @@
 
         </div>
       </div>
+
+      <!-- TEMP: Sprite debug viewer (shows the full collage).
+           If you see the image here, the path is correct. Remove this block later. -->
+      <div class="debug-wrap block mx-auto max-w-6xl px-4 mt-6">
+        <div class="rounded-2xl border border-neutral-800 p-4">
+          <div class="debug-note mb-2">Sprite debug viewer – if you can see the full collage below, the sprite path <code>assets/icons-sprite.png?v=5</code> is loading correctly.</div>
+          <img class="debug-img" src="./assets/icons-sprite.png?v=5" alt="Sprite debug" />
+        </div>
+      </div>
+
     </section>
 
     <!-- Design → Experience -->
