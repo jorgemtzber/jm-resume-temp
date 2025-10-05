@@ -20,7 +20,7 @@
     <style>
       /* === Byte-perfect 6-icon sprite for the highlight tiles ===
          Sprite grid assumed 3 columns × 2 rows, equal-size cells.
-         If your layout differs, tell me and I’ll map the exact positions. */
+         If your collage layout differs, I’ll remap positions. */
 
       .tile-icon{
         height: 4rem;                /* h-16 */
@@ -28,38 +28,33 @@
         background-color: rgb(38 38 38); /* neutral-800 */
         margin-bottom: .75rem;       /* mb-3 */
         transition: background-color .2s ease;
-        background-image: url('./assets/icons-sprite.png'); /* exact file, byte-for-byte */
+
+        /* Cache-busted sprite URL; keeps PNG bytes untouched */
+        background-image: url('./assets/icons-sprite.png?v=2');
         background-repeat: no-repeat;
 
-        /* Show one cell of a 3×2 grid:
-           background-size = 300% (3 cols) × 200% (2 rows) */
+        /* Show one cell of a 3×2 grid: 3 cols × 2 rows */
         background-size: 300% 200%;
-        background-position: 0% 0%;  /* overridden per icon */
-        /* If your sprite art is dark on dark, uncomment invert to brighten:
-           filter: invert(1); */
-        opacity: .9;
+        background-position: 0% 0%;
+
+        /* Make dark icons pop on dark tile (remove if your art is already light) */
+        filter: invert(1);
+        opacity: .95;
       }
       a.group:hover .tile-icon{ background-color: rgb(64 64 64); } /* neutral-700 */
 
       /* Grid cell positions:
          column: 1=0%  2=50%  3=100%
          row:    1=0%  2=100% */
-
-      /* Experience (top-left) */
-      .icon-experience     { background-position:   0%   0%; }
-      /* Skills/Stack (top-center) */
-      .icon-skills         { background-position:  50%   0%; }
-      /* Education (top-right) */
-      .icon-education      { background-position: 100%   0%; }
-      /* Milestones (bottom-left) */
-      .icon-milestones     { background-position:   0% 100%; }
-      /* Certifications (bottom-center) */
-      .icon-certifications { background-position:  50% 100%; }
-      /* Contact (bottom-right) */
-      .icon-contact        { background-position: 100% 100%; }
+      .icon-experience     { background-position:   0%   0%; }  /* top-left        */
+      .icon-skills         { background-position:  50%   0%; }  /* top-center      */
+      .icon-education      { background-position: 100%   0%; }  /* top-right       */
+      .icon-milestones     { background-position:   0% 100%; }  /* bottom-left     */
+      .icon-certifications { background-position:  50% 100%; }  /* bottom-center   */
+      .icon-contact        { background-position: 100% 100%; }  /* bottom-right    */
 
       /* Optional: if icons look a touch small due to padding in the PNG,
-         you can gently increase scale (keeps bytes intact):
+         increase scale slightly (keeps bytes intact), e.g.:
          .tile-icon{ background-size: 280% 190%; } */
     </style>
   </head>
