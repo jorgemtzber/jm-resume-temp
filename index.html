@@ -16,33 +16,58 @@
       html { font-family: var(--font-system); }
     </style>
 
-    <!-- Sprite icons for Highlights -->
+    <!-- Sprite icons for Highlights using CSS masks (byte-perfect sprite) -->
     <style>
-      /* === 6-logo sprite (3 cols × 2 rows) === */
+      /* === Tile shell === */
       .tile-icon{
+        position: relative;
         height: 4rem;                 /* h-16 */
         border-radius: .5rem;         /* rounded-lg */
-        background-color: rgb(82 82 82);  /* neutral-600 so black icons show */
+        background-color: rgb(38 38 38);  /* neutral-800 */
         margin-bottom: .75rem;        /* mb-3 */
+        overflow: hidden;
         transition: background-color .2s ease;
-        background-image: url('./assets/icons-sprite.png?v=3'); /* cache-bust */
-        background-repeat: no-repeat;
-        background-size: 300% 200%;   /* 3 cols × 2 rows */
-        background-position: 0% 0%;
-        opacity: .98;
       }
-      a.group:hover .tile-icon{ background-color: rgb(115 115 115); } /* neutral-500 */
+      a.group:hover .tile-icon{ background-color: rgb(64 64 64); } /* neutral-700 */
 
-      /* Cell positions: col 0/50/100, row 0/100 */
-      .icon-experience     { background-position:   0%   0%; } /* top-left */
-      .icon-skills         { background-position:  50%   0%; } /* top-center */
-      .icon-education      { background-position: 100%   0%; } /* top-right */
-      .icon-milestones     { background-position:   0% 100%; } /* bottom-left */
-      .icon-certifications { background-position:  50% 100%; } /* bottom-center */
-      .icon-contact        { background-position: 100% 100%; } /* bottom-right */
+      /* === Icon layer (mask) ===
+         We render the icon via -webkit-mask/mask so we control its color,
+         independent of the tile background. The sprite bytes are unchanged. */
+      .tile-icon::after{
+        content: "";
+        position: absolute;
+        inset: 0;
 
-      /* If icons look slightly small due to padding in the PNG, try:
-         .tile-icon{ background-size: 280% 190%; }  */
+        /* Icon color (white on dark tile) */
+        background-color: white;
+        opacity: .95;
+
+        /* Use your single PNG sprite as a mask (3 columns × 2 rows) */
+        -webkit-mask-image: url('./assets/icons-sprite.png?v=4');
+                mask-image: url('./assets/icons-sprite.png?v=4');
+        -webkit-mask-repeat: no-repeat;
+                mask-repeat: no-repeat;
+        -webkit-mask-size: 300% 200%;
+                mask-size: 300% 200%;
+
+        /* These custom properties get set by each per-icon class */
+        -webkit-mask-position: var(--mask-x, 0%) var(--mask-y, 0%);
+                mask-position: var(--mask-x, 0%) var(--mask-y, 0%);
+      }
+
+      /* === Per-icon cell selection ===
+         Columns: 1=0%  2=50%  3=100%
+         Rows:    1=0%  2=100% */
+      .icon-experience     { --mask-x:   0%; --mask-y:   0%; } /* top-left      */
+      .icon-skills         { --mask-x:  50%; --mask-y:   0%; } /* top-center    */
+      .icon-education      { --mask-x: 100%; --mask-y:   0%; } /* top-right     */
+      .icon-milestones     { --mask-x:   0%; --mask-y: 100%; } /* bottom-left   */
+      .icon-certifications { --mask-x:  50%; --mask-y: 100%; } /* bottom-center */
+      .icon-contact        { --mask-x: 100%; --mask-y: 100%; } /* bottom-right  */
+
+      /* If icons look slightly small due to padding inside the PNG,
+         bump the mask size a touch (keeps your PNG bytes intact):
+         .tile-icon::after{ -webkit-mask-size: 280% 190%; mask-size: 280% 190%; } */
     </style>
   </head>
 
