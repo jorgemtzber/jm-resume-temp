@@ -14,7 +14,7 @@
       html { font-family: var(--font-system); }
     </style>
 
-    <!-- Sprite icons (white via CSS mask; sprite bytes unchanged) -->
+    <!-- Sprite icons (white via CSS mask; sprite served from GitHub RAW) -->
     <style>
       .tile-icon{
         position: relative;
@@ -27,16 +27,19 @@
       }
       a.group:hover .tile-icon{ background-color: rgb(64 64 64); } /* neutral-700 */
 
-      /* Icon layer drawn from PNG sprite (3 cols × 2 rows) */
+      /* Draw the icon from the sprite as a white mask */
       .tile-icon::after{
         content: "";
         position: absolute;
         inset: 0;
-        background-color: white;             /* icon color */
+
+        /* Icon color */
+        background-color: white;
         opacity: .98;
 
-        -webkit-mask-image: url('./assets/icons-sprite-v2.png?v=1');
-                mask-image: url('./assets/icons-sprite-v2.png?v=1');
+        /* Use RAW GitHub sprite (3 columns × 2 rows). Bytes remain unchanged. */
+        -webkit-mask-image: url('https://raw.githubusercontent.com/jorgemtzber/jm-resume-temp/main/assets/icons-sprite.png');
+                mask-image: url('https://raw.githubusercontent.com/jorgemtzber/jm-resume-temp/main/assets/icons-sprite.png');
         -webkit-mask-repeat: no-repeat;
                 mask-repeat: no-repeat;
         -webkit-mask-size: 300% 200%;
@@ -45,15 +48,15 @@
                 mask-position: var(--mask-x,0%) var(--mask-y,0%);
       }
 
-      /* cell selection (cols 0/50/100; rows 0/100) */
-      .icon-experience     { --mask-x:   0%; --mask-y:   0%; }
-      .icon-skills         { --mask-x:  50%; --mask-y:   0%; }
-      .icon-education      { --mask-x: 100%; --mask-y:   0%; }
-      .icon-milestones     { --mask-x:   0%; --mask-y: 100%; }
-      .icon-certifications { --mask-x:  50%; --mask-y: 100%; }
-      .icon-contact        { --mask-x: 100%; --mask-y: 100%; }
+      /* Cell selection (cols 0/50/100; rows 0/100) */
+      .icon-experience     { --mask-x:   0%; --mask-y:   0%; } /* briefcase chart */
+      .icon-skills         { --mask-x:  50%; --mask-y:   0%; } /* code stack */
+      .icon-education      { --mask-x: 100%; --mask-y:   0%; } /* graduation/book/bubble */
+      .icon-milestones     { --mask-x:   0%; --mask-y: 100%; } /* flag path */
+      .icon-certifications { --mask-x:  50%; --mask-y: 100%; } /* badge/check */
+      .icon-contact        { --mask-x: 100%; --mask-y: 100%; } /* envelope/chat */
 
-      /* TEMP: debug viewer */
+      /* TEMP: debug viewer (loads RAW directly too) */
       .debug-note{ font-size:.75rem; color:rgb(163 163 163); }
       .debug-img{ max-width:100%; height:auto; border-radius:.75rem; border:1px solid rgb(64 64 64); }
     </style>
@@ -92,7 +95,9 @@
     <!-- Hero -->
     <section class="relative overflow-hidden">
       <div class="mx-auto max-w-6xl px-4 pt-20 pb-10 md:pt-28 md:pb-16">
-        <h1 class="mt-4 text-5xl md:text-7xl font-semibold leading-[1.05]">Operator. Closer. Systems thinker.</h1>
+        <h1 class="mt-4 text-5xl md:text-7xl font-semibold leading-[1.05]">
+          Operator. Closer. Systems thinker.
+        </h1>
         <p class="mt-6 max-w-xl text-neutral-300 text-base md:text-lg leading-relaxed">
           18% revenue growth, 97% retention, +30% rush capacity. Short sales cycles (1–3 days), bilingual, Security+.
         </p>
@@ -104,8 +109,12 @@
 
       <!-- Full-bleed headshot -->
       <div class="relative h-[44vh] md:h-[56vh] w-full">
-        <img src="./headshot.jpg?v=1" alt="Jorge Martinez professional headshot"
-             class="absolute inset-0 w-full h-full object-cover object-center" loading="eager" />
+        <img
+          src="./headshot.jpg?v=1"
+          alt="Jorge Martinez professional headshot"
+          class="absolute inset-0 w-full h-full object-cover object-center"
+          loading="eager"
+        />
         <div class="absolute inset-0 bg-gradient-to-br from-neutral-950/30 via-neutral-900/20 to-neutral-950/30"></div>
       </div>
 
@@ -146,20 +155,21 @@
         </div>
       </div>
 
-      <!-- TEMP: sprite debug viewer (remove later) -->
+      <!-- TEMP: sprite debug viewer (now also uses RAW) -->
       <div class="mx-auto max-w-6xl px-4 mt-6">
         <div class="rounded-2xl border border-neutral-800 p-4">
           <div class="debug-note mb-2">
-            Sprite debug viewer — if you can see the collage below, the sprite path
-            <code>/assets/icons-sprite-v2.png?v=1</code> is loading correctly.
+            Sprite debug viewer — if you can see the collage below, the sprite path is loading correctly.
           </div>
-          <img class="debug-img" src="/assets/icons-sprite-v2.png?v=1" alt="Sprite debug">
+          <img
+            class="debug-img"
+            src="https://raw.githubusercontent.com/jorgemtzber/jm-resume-temp/main/assets/icons-sprite.png"
+            alt="Sprite debug">
         </div>
       </div>
-
     </section>
 
-    <!-- (Rest of sections unchanged) -->
+    <!-- Rest of your sections unchanged ... -->
 
     <footer class="border-t border-neutral-900 py-10 text-xs text-neutral-400">
       <div class="mx-auto max-w-6xl px-4 flex flex-col md:flex-row items-center justify-between gap-4">
