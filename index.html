@@ -15,11 +15,6 @@
       html { font-family: var(--font-system); }
       /* keep icon-box padding tweak you liked */
       #highlights .grid a .rounded-lg.bg-neutral-800.mb-3 { padding: 0.25rem !important; }
-
-      /* tiny style for the path status line (debug aid) */
-      .path-status { font-size: 11px; color: #9ca3af; margin-top: 6px; }
-      .ok { color: #10b981; }
-      .err { color: #ef4444; }
     </style>
   </head>
 
@@ -129,7 +124,6 @@
       <!-- Media cluster (3 cards) -->
       <div class="mx-auto max-w-6xl px-4 mt-10 grid grid-cols-1 md:grid-cols-3 gap-4">
 
-        <!-- CHANGED START: image src now points to ROOT -->
         <!-- Card 1: Printer (engine) -->
         <div class="rounded-2xl border border-neutral-800 p-0 overflow-hidden">
           <div class="aspect-[16/10] w-full">
@@ -171,13 +165,6 @@
             />
           </div>
         </div>
-        <!-- CHANGED END -->
-
-      </div>
-
-      <!-- inline path status (debug aid; remove later if you want) -->
-      <div class="mx-auto max-w-6xl px-4">
-        <div id="pathStatus" class="path-status"></div>
       </div>
 
       <!-- Take a closer look -->
@@ -328,28 +315,6 @@
     <script>
       // Set dynamic year
       document.getElementById('year').textContent = new Date().getFullYear();
-
-      // --- Debug: show HTTP status for each image path so we can verify quickly ---
-      (async () => {
-        const targets = [
-          { id: 'Printer', url: '/exp-ops-printer.png?v=3' },
-          { id: 'SEG Booth', url: '/exp-seg-booth.png?v=3' },
-          { id: 'Speed Case', url: '/exp-speed-case.png?v=3' },
-        ];
-        const el = document.getElementById('pathStatus');
-        if (!el) return;
-        const out = [];
-        for (const t of targets) {
-          try {
-            const res = await fetch(t.url, { method: 'HEAD', cache: 'no-store' });
-            out.push(`<span>${t.id}:</span> <span class="${res.ok ? 'ok' : 'err'}">${res.status} ${res.ok ? 'OK' : 'ERR'}</span> <code>${t.url}</code>`);
-          } catch (e) {
-            out.push(`<span>${t.id}:</span> <span class="err">ERR</span> <code>${t.url}</code>`);
-          }
-        }
-        el.innerHTML = out.join(' &nbsp;|&nbsp; ');
-      })();
-      // ---------------------------------------------------------------------------
     </script>
   </body>
 </html>
