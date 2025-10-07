@@ -16,7 +16,7 @@
       html { font-family: var(--font-system); }
     </style>
 
-    <!-- Sprite icons (white via CSS mask; sprite served from GitHub RAW to bypass Vercel cache) -->
+    <!-- Sprite icons (white via CSS mask; SPRITE AT PROJECT ROOT) -->
     <style>
       .tile-icon{
         position: relative;
@@ -29,7 +29,7 @@
       }
       a.group:hover .tile-icon{ background-color: rgb(64 64 64); } /* neutral-700 */
 
-      /* Draw the icon from the sprite as a white mask (your PNG bytes remain unchanged) */
+      /* Draw the icon from the sprite as a white mask (bytes unchanged) */
       .tile-icon::after{
         content: "";
         position: absolute;
@@ -37,9 +37,9 @@
         background-color: white;     /* icon color */
         opacity: .98;
 
-        /* 3 columns × 2 rows, no outer margins on the sprite */
-        -webkit-mask-image: url('https://raw.githubusercontent.com/jorgemtzber/jm-resume-temp/main/assets/icons-sprite.png');
-                mask-image: url('https://raw.githubusercontent.com/jorgemtzber/jm-resume-temp/main/assets/icons-sprite.png');
+        /* 3 columns × 2 rows, sprite at ROOT */
+        -webkit-mask-image: url('./icons-sprite.png?v=1');
+                mask-image: url('./icons-sprite.png?v=1');
         -webkit-mask-repeat: no-repeat;
                 mask-repeat: no-repeat;
         -webkit-mask-size: 300% 200%;
@@ -56,7 +56,7 @@
       .icon-certifications { --mask-x:  50%; --mask-y: 100%; }  /* badge/check */
       .icon-contact        { --mask-x: 100%; --mask-y: 100%; }  /* envelope/chat */
 
-      /* TEMP: debug viewer (can remove after you see icons) */
+      /* TEMP: debug viewer (remove once icons show) */
       .debug-note{ font-size:.75rem; color:rgb(163 163 163); }
       .debug-img{ max-width:100%; height:auto; border-radius:.75rem; border:1px solid rgb(64 64 64); }
     </style>
@@ -164,7 +164,7 @@
           </div>
           <img
             class="debug-img"
-            src="https://raw.githubusercontent.com/jorgemtzber/jm-resume-temp/main/assets/icons-sprite.png"
+            src="/icons-sprite.png?v=1"
             alt="Sprite debug"
           />
         </div>
@@ -334,4 +334,3 @@
     </script>
   </body>
 </html>
-
