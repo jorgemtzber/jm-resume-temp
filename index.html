@@ -15,51 +15,6 @@
       }
       html { font-family: var(--font-system); }
     </style>
-
-    <!-- Sprite icons (white via CSS mask; SPRITE AT PROJECT ROOT) -->
-    <style>
-      .tile-icon{
-        position: relative;
-        height: 4rem;             /* h-16 */
-        border-radius: .5rem;     /* rounded-lg */
-        background-color: rgb(38 38 38); /* neutral-800 */
-        margin-bottom: .75rem;    /* mb-3 */
-        transition: background-color .2s ease;
-        overflow: hidden;
-      }
-      a.group:hover .tile-icon{ background-color: rgb(64 64 64); } /* neutral-700 */
-
-      /* Draw the icon from the sprite as a white mask (bytes unchanged) */
-      .tile-icon::after{
-        content: "";
-        position: absolute;
-        inset: 0;
-        background-color: white;     /* icon color */
-        opacity: .98;
-
-        /* 3 columns × 2 rows, sprite at ROOT */
-        -webkit-mask-image: url('./icons-sprite.png?v=1');
-                mask-image: url('./icons-sprite.png?v=1');
-        -webkit-mask-repeat: no-repeat;
-                mask-repeat: no-repeat;
-        -webkit-mask-size: 300% 200%;
-                mask-size: 300% 200%;
-        -webkit-mask-position: var(--mask-x,0%) var(--mask-y,0%);
-                mask-position: var(--mask-x,0%) var(--mask-y,0%);
-      }
-
-      /* Cell selection (cols 0/50/100; rows 0/100) — matches your 6 icons */
-      .icon-experience     { --mask-x:   0%; --mask-y:   0%; }  /* briefcase/chart */
-      .icon-skills         { --mask-x:  50%; --mask-y:   0%; }  /* code/stack */
-      .icon-education      { --mask-x: 100%; --mask-y:   0%; }  /* grad/book/bubble */
-      .icon-milestones     { --mask-x:   0%; --mask-y: 100%; }  /* flag/path */
-      .icon-certifications { --mask-x:  50%; --mask-y: 100%; }  /* badge/check */
-      .icon-contact        { --mask-x: 100%; --mask-y: 100%; }  /* envelope/chat */
-
-      /* TEMP: debug viewer (remove once icons show) */
-      .debug-note{ font-size:.75rem; color:rgb(163 163 163); }
-      .debug-img{ max-width:100%; height:auto; border-radius:.75rem; border:1px solid rgb(64 64 64); }
-    </style>
   </head>
 
   <body class="min-h-screen bg-neutral-950 text-neutral-100">
@@ -119,54 +74,58 @@
         <div class="absolute inset-0 bg-gradient-to-br from-neutral-950/30 via-neutral-900/20 to-neutral-950/30"></div>
       </div>
 
-      <!-- Highlights strip (no overlap; spacing added with mt-8/md:mt-12) -->
+      <!-- Highlights strip -->
       <div id="highlights" class="relative z-10 mx-auto max-w-6xl px-4 mt-8 md:mt-12" data-testid="highlights-grid">
         <div class="grid grid-cols-2 md:grid-cols-6 gap-2 md:gap-3">
 
+          <!-- Experience -->
           <a href="#experience" class="group rounded-xl bg-neutral-900/70 border border-neutral-800 p-4 hover:border-neutral-700">
-            <div class="tile-icon icon-experience" aria-hidden="true"></div>
+            <div class="h-16 rounded-lg bg-neutral-800 mb-3 flex items-center justify-center group-hover:bg-neutral-700 transition-colors">
+              <img src="./icon-experience.png" alt="Experience icon" class="w-10 h-10 object-contain" loading="lazy">
+            </div>
             <div class="text-sm text-neutral-300 group-hover:text-white">Experience</div>
           </a>
 
+          <!-- Skills/Stack -->
           <a href="#skills" class="group rounded-xl bg-neutral-900/70 border border-neutral-800 p-4 hover:border-neutral-700">
-            <div class="tile-icon icon-skills" aria-hidden="true"></div>
+            <div class="h-16 rounded-lg bg-neutral-800 mb-3 flex items-center justify-center group-hover:bg-neutral-700 transition-colors">
+              <img src="./icon-skills.png" alt="Skills icon" class="w-10 h-10 object-contain" loading="lazy">
+            </div>
             <div class="text-sm text-neutral-300 group-hover:text-white">Skills/Stack</div>
           </a>
 
+          <!-- Education -->
           <a href="#education" class="group rounded-xl bg-neutral-900/70 border border-neutral-800 p-4 hover:border-neutral-700">
-            <div class="tile-icon icon-education" aria-hidden="true"></div>
+            <div class="h-16 rounded-lg bg-neutral-800 mb-3 flex items-center justify-center group-hover:bg-neutral-700 transition-colors">
+              <img src="./icon-education.png" alt="Education icon" class="w-10 h-10 object-contain" loading="lazy">
+            </div>
             <div class="text-sm text-neutral-300 group-hover:text-white">Education</div>
           </a>
 
+          <!-- Milestones -->
           <a href="#milestones" class="group rounded-xl bg-neutral-900/70 border border-neutral-800 p-4 hover:border-neutral-700">
-            <div class="tile-icon icon-milestones" aria-hidden="true"></div>
+            <div class="h-16 rounded-lg bg-neutral-800 mb-3 flex items-center justify-center group-hover:bg-neutral-700 transition-colors">
+              <img src="./icon-milestones.png" alt="Milestones icon" class="w-10 h-10 object-contain" loading="lazy">
+            </div>
             <div class="text-sm text-neutral-300 group-hover:text-white">Milestones</div>
           </a>
 
+          <!-- Certifications -->
           <a href="#accessories" class="group rounded-xl bg-neutral-900/70 border border-neutral-800 p-4 hover:border-neutral-700">
-            <div class="tile-icon icon-certifications" aria-hidden="true"></div>
+            <div class="h-16 rounded-lg bg-neutral-800 mb-3 flex items-center justify-center group-hover:bg-neutral-700 transition-colors">
+              <img src="./icon-certifications.png" alt="Certifications icon" class="w-10 h-10 object-contain" loading="lazy">
+            </div>
             <div class="text-sm text-neutral-300 group-hover:text-white">Certifications</div>
           </a>
 
+          <!-- Contact -->
           <a href="#contact" class="group rounded-xl bg-neutral-900/70 border border-neutral-800 p-4 hover:border-neutral-700">
-            <div class="tile-icon icon-contact" aria-hidden="true"></div>
+            <div class="h-16 rounded-lg bg-neutral-800 mb-3 flex items-center justify-center group-hover:bg-neutral-700 transition-colors">
+              <img src="./icon-contact.png" alt="Contact icon" class="w-10 h-10 object-contain" loading="lazy">
+            </div>
             <div class="text-sm text-neutral-300 group-hover:text-white">Contact</div>
           </a>
 
-        </div>
-      </div>
-
-      <!-- TEMP: sprite debug viewer (remove once icons show) -->
-      <div class="mx-auto max-w-6xl px-4 mt-6">
-        <div class="rounded-2xl border border-neutral-800 p-4">
-          <div class="debug-note mb-2">
-            Sprite debug viewer — if you can see the collage below, the sprite path is loading correctly.
-          </div>
-          <img
-            class="debug-img"
-            src="/icons-sprite.png?v=1"
-            alt="Sprite debug"
-          />
         </div>
       </div>
     </section>
