@@ -13,7 +13,8 @@
         --font-system: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
       }
       html { font-family: var(--font-system); }
-      /* icon box padding tweak (kept from your working version) */
+
+      /* keep icon-box padding tweak you liked */
       #highlights .grid a .rounded-lg.bg-neutral-800.mb-3 { padding: 0.25rem !important; }
     </style>
   </head>
@@ -112,7 +113,7 @@
       </div>
     </section>
 
-    <!-- Design → Experience -->
+    <!-- Experience -->
     <section id="experience" class="pt-20 md:pt-32" aria-label="Experience">
       <div class="mx-auto max-w-3xl px-4">
         <h2 class="text-4xl md:text-5xl font-semibold leading-tight">Experience designed for speed and reliability</h2>
@@ -121,29 +122,50 @@
         </p>
       </div>
 
-      <!-- Media cluster -->
+      <!-- Media cluster (3 cards) -->
       <div class="mx-auto max-w-6xl px-4 mt-10 grid grid-cols-1 md:grid-cols-3 gap-4">
 
-        <!-- CHANGED: image src → absolute -->
+        <!-- Card 1: Printer (engine) -->
         <div class="rounded-2xl border border-neutral-800 p-0 overflow-hidden">
           <div class="aspect-[16/10] w-full">
-            <img src="/assets/exp-ops-printer.jpg?v=1" alt="Wide-format printer (engine)" class="w-full h-full object-cover" loading="lazy" decoding="async">
+            <img
+              id="card1"
+              class="w-full h-full object-cover"
+              src="/assets/exp-ops-printer.png?v=2"
+              alt="Wide-format printer (engine)"
+              loading="lazy"
+              decoding="async"
+            />
           </div>
         </div>
 
+        <!-- Card 2: SEG Booth (experience) -->
         <div class="rounded-2xl border border-neutral-800 p-0 overflow-hidden">
           <div class="aspect-[16/10] w-full">
-            <img src="/assets/exp-seg-booth.jpg?v=1" alt="Premium SEG trade-show booth (experience)" class="w-full h-full object-cover" loading="lazy" decoding="async">
+            <img
+              id="card2"
+              class="w-full h-full object-cover"
+              src="/assets/exp-seg-booth.png?v=2"
+              alt="Premium SEG trade-show booth (experience)"
+              loading="lazy"
+              decoding="async"
+            />
           </div>
         </div>
 
+        <!-- Card 3: Flight case (speed) -->
         <div class="rounded-2xl border border-neutral-800 p-0 overflow-hidden">
           <div class="aspect-[16/10] w-full">
-            <img src="/assets/exp-speed-case.jpg?v=1" alt="Rolling flight case in motion (speed)" class="w-full h-full object-cover" loading="lazy" decoding="async">
+            <img
+              id="card3"
+              class="w-full h-full object-cover"
+              src="/assets/exp-speed-case.png?v=2"
+              alt="Rolling flight case in motion (speed)"
+              loading="lazy"
+              decoding="async"
+            />
           </div>
         </div>
-        <!-- /CHANGED -->
-
       </div>
 
       <!-- Take a closer look -->
@@ -291,6 +313,9 @@
       </div>
     </footer>
 
-    <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+    <script>
+      // Set dynamic year
+      document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
   </body>
 </html>
