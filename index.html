@@ -65,6 +65,7 @@
       <div class="mx-auto max-w-6xl px-4">
         <img
           src="./assets/headshot.jpg"
+          data-candidates="./assets/headshot.jpg,/headshot.jpg,./Headshot.jpg,/Headshot.jpg"
           alt="Jorge Martinez professional headshot"
           class="mt-8 md:mt-10 mx-auto w-full rounded-2xl ring-1 ring-neutral-800/60 shadow-2xl object-contain"
           style="max-height: 56vh;"
@@ -75,39 +76,57 @@
       <!-- Highlights strip -->
       <div id="highlights" class="mx-auto max-w-6xl px-4 mt-10 md:mt-12" data-testid="highlights-grid">
         <div class="grid grid-cols-2 md:grid-cols-6 gap-2 md:gap-3">
+          <!-- Experience -->
           <a href="#experience" class="group rounded-xl bg-neutral-900/70 border border-neutral-800 p-4 hover:border-neutral-700">
             <div class="h-16 rounded-lg bg-neutral-800 mb-3 flex items-center justify-center p-1 group-hover:bg-neutral-700 transition-colors">
-              <img src="./assets/icon-experience.png" alt="Experience icon" class="h-full w-full object-contain block" loading="lazy" decoding="async">
+              <img src="./assets/icon-experience.png"
+                   data-candidates="./assets/icon-experience.png,/icon-experience.png"
+                   alt="Experience icon" class="h-full w-full object-contain block" loading="lazy" decoding="async">
             </div>
             <div class="text-sm text-neutral-300 group-hover:text-white">Experience</div>
           </a>
+          <!-- Skills -->
           <a href="#skills" class="group rounded-xl bg-neutral-900/70 border border-neutral-800 p-4 hover:border-neutral-700">
             <div class="h-16 rounded-lg bg-neutral-800 mb-3 flex items-center justify-center p-1 group-hover:bg-neutral-700 transition-colors">
-              <img src="./assets/icon-skills.png" alt="Skills icon" class="h-full w-full object-contain block" loading="lazy" decoding="async">
+              <img src="./assets/icon-skills.png"
+                   data-candidates="./assets/icon-skills.png,/icon-skills.png"
+                   alt="Skills icon" class="h-full w-full object-contain block" loading="lazy" decoding="async">
             </div>
             <div class="text-sm text-neutral-300 group-hover:text-white">Skills/Stack</div>
           </a>
+          <!-- Education -->
           <a href="#education" class="group rounded-xl bg-neutral-900/70 border border-neutral-800 p-4 hover:border-neutral-700">
             <div class="h-16 rounded-lg bg-neutral-800 mb-3 flex items-center justify-center p-1 group-hover:bg-neutral-700 transition-colors">
-              <img src="./assets/icon-education.png" alt="Education icon" class="h-full w-full object-contain block" loading="lazy" decoding="async">
+              <img src="./assets/icon-education.png"
+                   data-candidates="./assets/icon-education.png,/icon-education.png"
+                   alt="Education icon" class="h-full w-full object-contain block" loading="lazy" decoding="async">
             </div>
             <div class="text-sm text-neutral-300 group-hover:text-white">Education</div>
           </a>
+          <!-- Milestones -->
           <a href="#milestones" class="group rounded-xl bg-neutral-900/70 border border-neutral-800 p-4 hover:border-neutral-700">
             <div class="h-16 rounded-lg bg-neutral-800 mb-3 flex items-center justify-center p-1 group-hover:bg-neutral-700 transition-colors">
-              <img src="./assets/icon-milestones.png" alt="Milestones icon" class="h-full w-full object-contain block" loading="lazy" decoding="async">
+              <img src="./assets/icon-milestones.png"
+                   data-candidates="./assets/icon-milestones.png,/icon-milestones.png"
+                   alt="Milestones icon" class="h-full w-full object-contain block" loading="lazy" decoding="async">
             </div>
             <div class="text-sm text-neutral-300 group-hover:text-white">Milestones</div>
           </a>
+          <!-- Certifications -->
           <a href="#accessories" class="group rounded-xl bg-neutral-900/70 border border-neutral-800 p-4 hover:border-neutral-700">
             <div class="h-16 rounded-lg bg-neutral-800 mb-3 flex items-center justify-center p-1 group-hover:bg-neutral-700 transition-colors">
-              <img src="./assets/icon-certifications.png" alt="Certifications icon" class="h-full w-full object-contain block" loading="lazy" decoding="async">
+              <img src="./assets/icon-certifications.png"
+                   data-candidates="./assets/icon-certifications.png,/icon-certifications.png"
+                   alt="Certifications icon" class="h-full w-full object-contain block" loading="lazy" decoding="async">
             </div>
             <div class="text-sm text-neutral-300 group-hover:text-white">Certifications</div>
           </a>
+          <!-- Contact -->
           <a href="#contact" class="group rounded-xl bg-neutral-900/70 border border-neutral-800 p-4 hover:border-neutral-700">
             <div class="h-16 rounded-lg bg-neutral-800 mb-3 flex items-center justify-center p-1 group-hover:bg-neutral-700 transition-colors">
-              <img src="./assets/icon-contact.png" alt="Contact icon" class="h-full w-full object-contain block" loading="lazy" decoding="async">
+              <img src="./assets/icon-contact.png"
+                   data-candidates="./assets/icon-contact.png,/icon-contact.png"
+                   alt="Contact icon" class="h-full w-full object-contain block" loading="lazy" decoding="async">
             </div>
             <div class="text-sm text-neutral-300 group-hover:text-white">Contact</div>
           </a>
@@ -126,9 +145,18 @@
 
       <!-- Media cluster -->
       <div class="mx-auto max-w-6xl px-4 mt-10 grid grid-cols-1 md:grid-cols-3 gap-4">
-        <img src="./assets/exp-ops-printer.png" alt="Wide-format printer (engine)" class="aspect-[16/10] rounded-2xl bg-neutral-900 border border-neutral-800 object-cover" loading="lazy" decoding="async">
-        <img src="./assets/exp-seg-booth.png" alt="Premium SEG trade-show booth (experience)" class="aspect-[16/10] rounded-2xl bg-neutral-900 border border-neutral-800 object-cover" loading="lazy" decoding="async">
-        <img src="./assets/exp-speed-case.png" alt="Rolling flight case in motion (speed)" class="aspect-[16/10] rounded-2xl bg-neutral-900 border border-neutral-800 object-cover" loading="lazy" decoding="async">
+        <img src="./assets/exp-ops-printer.png"
+             data-candidates="./assets/exp-ops-printer.png,/exp-ops-printer.png,./assets/exp-ops-printer.jpg,/exp-ops-printer.jpg"
+             alt="Wide-format printer (engine)"
+             class="aspect-[16/10] rounded-2xl bg-neutral-900 border border-neutral-800 object-cover" loading="lazy" decoding="async">
+        <img src="./assets/exp-seg-booth.png"
+             data-candidates="./assets/exp-seg-booth.png,/exp-seg-booth.png,./assets/exp-seg-booth.jpg,/exp-seg-booth.jpg"
+             alt="Premium SEG trade-show booth (experience)"
+             class="aspect-[16/10] rounded-2xl bg-neutral-900 border border-neutral-800 object-cover" loading="lazy" decoding="async">
+        <img src="./assets/exp-speed-case.png"
+             data-candidates="./assets/exp-speed-case.png,/exp-speed-case.png,./assets/exp-speed-case.jpg,/exp-speed-case.jpg"
+             alt="Rolling flight case in motion (speed)"
+             class="aspect-[16/10] rounded-2xl bg-neutral-900 border border-neutral-800 object-cover" loading="lazy" decoding="async">
       </div>
 
       <!-- Take a closer look -->
@@ -142,28 +170,42 @@
         </div>
       </div>
 
-      <!-- Feature panels (ROOT FILENAMES) -->
+      <!-- Feature panels (three small cards) -->
       <div class="mx-auto max-w-6xl px-4 mt-10 grid grid-cols-1 md:grid-cols-3 gap-4">
         <!-- Card 1 -->
         <div class="rounded-2xl border border-neutral-800 p-5">
           <div class="aspect-[16/10] rounded-lg overflow-hidden bg-neutral-900 mb-3">
-            <img src="/feat-growth.png" alt="Ascending cyan light bars on black" class="h-full w-full object-cover" loading="lazy" decoding="async" width="1920" height="1200" />
+            <img
+              src="/feat-growth.png"
+              data-candidates="/feat-growth.png,/feat-growth.jpg,./assets/feat-growth.png,./assets/feat-growth.jpg"
+              alt="Ascending cyan light bars on black"
+              class="h-full w-full object-cover" loading="lazy" decoding="async" width="1920" height="1200" />
           </div>
           <h4 class="text-lg font-semibold">18% revenue growth</h4>
           <p class="text-sm text-neutral-300 mt-1">Upsold SEG + backdrop packages; optimized throughput.</p>
         </div>
+
         <!-- Card 2 -->
         <div class="rounded-2xl border border-neutral-800 p-5">
           <div class="aspect-[16/10] rounded-lg overflow-hidden bg-neutral-900 mb-3">
-            <img src="/feat-retention.png" alt="Neon cyan magnet with particles held in place" class="h-full w-full object-cover" loading="lazy" decoding="async" width="1920" height="1200" />
+            <img
+              src="/feat-retention.png"
+              data-candidates="/feat-retention.png,/feat-retention.jpg,./assets/feat-retention.png,./assets/feat-retention.jpg,/feat-retention-magnet.png,./assets/feat-retention-magnet.png"
+              alt="Neon cyan magnet with particles held in place"
+              class="h-full w-full object-cover" loading="lazy" decoding="async" width="1920" height="1200" />
           </div>
           <h4 class="text-lg font-semibold">97% retention</h4>
           <p class="text-sm text-neutral-300 mt-1">White-glove service; on-time delivery under 1–3 day SLAs.</p>
         </div>
+
         <!-- Card 3 -->
         <div class="rounded-2xl border border-neutral-800 p-5">
           <div class="aspect-[16/10] rounded-lg overflow-hidden bg-neutral-900 mb-3">
-            <img src="/feat-rush.png" alt="Rounded neon speed glyph with cyan motion trails" class="h-full w-full object-cover" loading="lazy" decoding="async" width="1920" height="1200" />
+            <img
+              src="/feat-rush.png"
+              data-candidates="/feat-rush.png,/feat-rush.jpg,./assets/feat-rush.png,./assets/feat-rush.jpg,/feat-rush-rounded-speed.png,./assets/feat-rush-rounded-speed.png"
+              alt="Rounded neon speed glyph with cyan motion trails"
+              class="h-full w-full object-cover" loading="lazy" decoding="async" width="1920" height="1200" />
           </div>
           <h4 class="text-lg font-semibold">+30% rush capacity</h4>
           <p class="text-sm text-neutral-300 mt-1">Stabilized HP Stitch S1000 output; streamlined ops.</p>
@@ -286,6 +328,28 @@
     </footer>
 
     <script>
+      // try multiple image candidates until one loads
+      function tryLoad(el, urls, i) {
+        if (i >= urls.length) return;
+        const url = urls[i].trim();
+        if (!url) return tryLoad(el, urls, i + 1);
+        const img = new Image();
+        img.onload = () => { el.src = url; };
+        img.onerror = () => tryLoad(el, urls, i + 1);
+        img.src = url;
+      }
+      document.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('img[data-candidates]').forEach(el => {
+          const list = el.getAttribute('data-candidates');
+          if (!list) return;
+          const urls = list.split(',');
+          // start by setting the first candidate immediately
+          el.src = urls[0].trim();
+          // also hook onerror to keep trying
+          el.onerror = () => tryLoad(el, urls, 1);
+        });
+      });
+      // Set dynamic year
       document.getElementById('year').textContent = new Date().getFullYear();
     </script>
   </body>
